@@ -10,7 +10,7 @@ export function PaintingCard({ painting }: { painting: Painting }) {
   return (
     <Link
       href={`/painting/${painting.id}`}
-      className="group block mb-4 break-inside-avoid"
+      className="group block mb-6 break-inside-avoid"
     >
       <div className="relative overflow-hidden bg-white/3">
         <Image

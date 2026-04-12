@@ -12,9 +12,9 @@ export function GalleryGrid({ paintings }: { paintings: Painting[] }) {
   }
 
   return (
-    <div className="px-4 py-8 max-w-[1600px] mx-auto">
+    <div className="px-8 py-12 max-w-[1600px] mx-auto">
       {/* Masonry via CSS columns */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
+      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6">
         {paintings.map(painting => (
           <PaintingCard key={painting.id} painting={painting} />
         ))}
