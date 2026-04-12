@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { GalleryGrid } from '@/components/GalleryGrid'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function GalleryPage() {
   const paintings = await prisma.painting.findMany({

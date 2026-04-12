@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'About' }
 
 export default async function AboutPage() {

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { DeleteButton } from './DeleteButton'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Admin — Paintings' }
 
 const STATUS_COLOR: Record<string, string> = {
