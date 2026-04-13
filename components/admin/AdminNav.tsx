@@ -6,7 +6,8 @@ import { signOut } from 'next-auth/react'
 
 const links = [
   { href: '/admin/paintings', label: 'Paintings' },
-  { href: '/admin/bio', label: 'Bio' },
+  { href: '/admin/exhibits', label: 'Exhibits' },
+  { href: '/admin/bio', label: 'About' },
 ]
 
 export function AdminNav() {
