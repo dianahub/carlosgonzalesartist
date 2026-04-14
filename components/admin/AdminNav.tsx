@@ -8,6 +8,7 @@ const links = [
   { href: '/admin/paintings', label: 'Paintings' },
   { href: '/admin/exhibits', label: 'Exhibits' },
   { href: '/admin/bio', label: 'About' },
+  { href: '/admin/contact', label: 'Contact' },
 ]
 
 export function AdminNav() {
