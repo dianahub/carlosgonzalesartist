@@ -39,7 +39,7 @@ model User {
 }
 
 model Exhibit {
-  id          String    @id @default(cuid())
+  id          String         @id @default(cuid())
   title       String
   venue       String
   location    String
@@ -48,7 +48,19 @@ model Exhibit {
   description String?
   imageUrl    String?
   link        String?
-  visible     Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  visible     Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  photos      ExhibitPhoto[]
+}
+
+model ExhibitPhoto {
+  id           String   @id @default(cuid())
+  exhibitId    String
+  exhibit      Exhibit  @relation(fields: [exhibitId], references: [id], onDelete: Cascade)
+  imageUrl     String
+  cloudinaryId String
+  caption      String?
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
 }

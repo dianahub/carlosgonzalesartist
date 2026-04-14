@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic'
@@ -16,6 +17,7 @@ export default async function ExhibitsPage() {
   const exhibits = await prisma.exhibit.findMany({
     where: { visible: true },
     orderBy: { startDate: 'desc' },
+    include: { photos: { orderBy: { order: 'asc' } } },
   })
 
   const now = new Date()
@@ -33,7 +35,7 @@ export default async function ExhibitsPage() {
       {upcoming.length > 0 && (
         <section className="mb-16">
           <h2 className="text-xs tracking-widest uppercase text-white/30 mb-8">Upcoming</h2>
-          <div className="space-y-10">
+          <div className="space-y-14">
             {upcoming.map(exhibit => (
               <ExhibitCard key={exhibit.id} exhibit={exhibit} />
             ))}
@@ -44,7 +46,7 @@ export default async function ExhibitsPage() {
       {past.length > 0 && (
         <section>
           <h2 className="text-xs tracking-widest uppercase text-white/30 mb-8">Past</h2>
-          <div className="space-y-10">
+          <div className="space-y-14">
             {past.map(exhibit => (
               <ExhibitCard key={exhibit.id} exhibit={exhibit} />
             ))}
@@ -64,6 +66,7 @@ function ExhibitCard({ exhibit }: { exhibit: {
   endDate: Date | null
   description: string | null
   link: string | null
+  photos: { id: string; imageUrl: string; caption: string | null }[]
 }}) {
   return (
     <article className="border-l border-white/10 pl-6">
@@ -84,6 +87,21 @@ function ExhibitCard({ exhibit }: { exhibit: {
         >
           More info →
         </a>
+      )}
+      {exhibit.photos.length > 0 && (
+        <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {exhibit.photos.map(photo => (
+            <div key={photo.id} className="relative aspect-square overflow-hidden">
+              <Image
+                src={photo.imageUrl}
+                alt={photo.caption ?? exhibit.title}
+                fill
+                className="object-cover transition-opacity hover:opacity-80"
+                sizes="(max-width: 640px) 50vw, 33vw"
+              />
+            </div>
+          ))}
+        </div>
       )}
     </article>
   )
